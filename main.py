@@ -27,6 +27,13 @@ class HashTable:
             if item[0] == key:
                 self.table[index].pop(i)
                 return
+            
+    def contains(self, key):
+        index = self.hash(key)
+        for kv in self.table[index]:
+            if kv[0] == key:
+                return True
+        return False        
 
 class SymbolTable:
     def __init__(self):
@@ -41,6 +48,9 @@ class SymbolTable:
     def delete(self, key):
         self.identifiers.delete(key)
 
+    def contains(self, key):
+        return self.identifiers.contains(key)    
+
 st_identifiers = SymbolTable()
 st_constants = SymbolTable()
 
@@ -49,3 +59,7 @@ st_constants.insert("b", 21)
 
 print(st_identifiers.get("a"))  
 print(st_constants.get("b")) 
+
+print(st_identifiers.contains("a")) 
+print(st_constants.contains("b")) 
+print(st_identifiers.contains("x"))
